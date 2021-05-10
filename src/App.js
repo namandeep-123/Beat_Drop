@@ -22,6 +22,7 @@ function App() {
     animationPercentage: 0,
   });
   const [libraryStatus, setLibraryStatus] = useState(false);
+  const [theme, setTheme] = useState(false);
 
   //Handler
   const songTimeHandler = (e) => {
@@ -42,10 +43,17 @@ function App() {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
   };
+
   return (
     <div className={`App ${libraryStatus ? "libraryy-active" : ""}`}>
-      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
-      <Song currentSong={currentSong} />
+      <Nav
+        libraryStatus={libraryStatus}
+        setLibraryStatus={setLibraryStatus}
+        theme={theme}
+        setTheme={setTheme}
+      />
+
+      <Song currentSong={currentSong} theme={theme} />
       <Player
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
@@ -64,6 +72,8 @@ function App() {
         setCurrentSong={setCurrentSong}
         setSongs={setSongs}
         libraryStatus={libraryStatus}
+        theme={theme}
+        setTheme={setTheme}
       />
       <audio
         onLoadedMetadata={songTimeHandler}

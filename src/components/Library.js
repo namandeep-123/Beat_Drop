@@ -1,6 +1,8 @@
 import React from "react";
 import LibrarySong from "./LibrarySong";
-
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../theme";
+import { GlobalStyles } from "../global";
 const Library = ({
   songs,
   setCurrentSong,
@@ -8,6 +10,7 @@ const Library = ({
   isPlaying,
   setSongs,
   libraryStatus,
+  theme,
 }) => {
   return (
     <div className={`library ${libraryStatus ? "active-library" : ""}`}>
@@ -26,6 +29,11 @@ const Library = ({
           />
         ))}
       </div>
+      <ThemeProvider theme={theme === false ? lightTheme : darkTheme}>
+        <>
+          <GlobalStyles />
+        </>
+      </ThemeProvider>
     </div>
   );
 };
